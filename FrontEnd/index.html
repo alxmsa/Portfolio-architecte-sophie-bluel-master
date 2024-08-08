@@ -62,7 +62,7 @@
       <section id="portfolio">
         <div class="m-e-portfolio">
           <h2>Mes Projets</h2>
-          <p id="modifier">
+          <p id="modifier" onclick="openModal()">
             <i class="fa-regular fa-pen-to-square"></i> Modifier
           </p>
         </div>
@@ -97,8 +97,41 @@
         </ul>
       </nav>
     </footer>
+
+    <div class="overlay"></div>
+
+    <div class="modal">
+      <div class="modal__close" onclick="closeModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+      <div class="modal__header">
+        <h3>Galerie photo</h3>
+      </div>
+
+      <div class="modal__body"></div>
+      <div class="modal__line"></div>
+      <div class="modal__footer">
+        <button class="modal__footer__button">Ajouter une photo</button>
+      </div>
+    </div>
+
+    <script>
+      function openModal() {
+        const openModal = (document.querySelector(".overlay").style.display =
+          "block");
+        const openModal2 = (document.querySelector(".modal").style.display =
+          "block");
+      }
+      function closeModal() {
+        const closeModal = (document.querySelector(".overlay").style.display =
+          "none");
+        const closeModal2 = (document.querySelector(".modal").style.display =
+          "none");
+      }
+    </script>
     <script src="js/projets.js"></script>
     <script src="js/function.js"></script>
     <script src="js/connection.js"></script>
+    <script src="js/modal.js"></script>
   </body>
 </html>

@@ -142,7 +142,6 @@ li a:hover {
 
 .gallery img {
 	width: 100%;
-
 }
 .buttonFilter {
 	display: flex;
@@ -240,4 +239,95 @@ footer nav ul {
 .m-e-portfolio p {
 	margin: 10px 20px;
 	display: none;
+}
+
+/* MODAL */
+.overlay{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vw;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+.modal {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 600px;
+	height: 580px;
+	background-color: #fff;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	border-radius: 3px;
+	padding: 20px;
+}
+.modal article {
+	margin: 5px;
+}
+.modal article button{
+	position: absolute;
+	margin-left: 55px;
+	margin-top: 2px;
+	cursor: pointer;
+	background-color: #000;
+	width: 5px;
+	height: 20px;
+}
+.modal article button i {
+	color: #fff;
+	font-size: 12px;
+}
+.modal__close {
+	position: absolute;
+	top: 15px;
+	right: 20px;
+	cursor: pointer;
+}
+.modal__close i {
+	font-size: 20px;
+}
+.modal__header h3 {
+	font-size: 1.5rem;
+	text-align: center;
+	padding: 20px 0 40px 0;
+}
+.modal__body{
+	display: flex;
+	flex-flow: row wrap;
+	width: 80%;
+	margin: auto;
+	justify-content: space-between;
+}
+.modal__body img{
+	height: 100px;
+}
+.modal__line{
+	height: 1px;
+	width: 80%;
+	margin: auto;
+	background-color: #1D6154;
+	margin-top: 70px;
+}
+
+.modal__footer__button {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+	font-family: 'Syne';
+	font-size: 16px;
+	padding: 8px 15px;
+	color: #fff;
+	border-radius: 60px;
+	background-color: #1D6154;
+	
+}
+.modal__footer__button:hover {
+	background-color: #fff;
+	color: #1D6154;
+	cursor: pointer;
+	border: 1px solid #1D6154;
 }
