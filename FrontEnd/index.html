@@ -111,7 +111,41 @@
       <div class="modal__body"></div>
       <div class="modal__line"></div>
       <div class="modal__footer">
-        <button class="modal__footer__button">Ajouter une photo</button>
+        <button class="modal__footer__button" onclick="ajoutPhoto()">
+          Ajouter une photo
+        </button>
+      </div>
+    </div>
+
+    <div class="modal__ajoutPhoto">
+      <div class="modal__close">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+      <div class="modal__header">
+        <h3>Ajout photo</h3>
+      </div>
+
+      <div class="modal__ajoutPhoto__body">
+        <form action="#">
+          <div class="modal__ajoutPhoto__body__div">
+            <i class="fa-regular fa-image"></i>
+            <label for="file">+ Ajout photo</label>
+            <input type="file" name="file" id="file" />
+            <p>jpg, png : 4mo max</p>
+          </div>
+          <div class="modal__ajoutPhoto__body__div2">
+            <label for="Titre">Titre</label><br />
+            <input type="text" name="titre" id="titre" />
+            <br />
+            <label for="categorie">Catégorie</label><br />
+            <input type="text" name="categorie" id="categorie" />
+            <br />
+          </div>
+        </form>
+      </div>
+      <div class="modal__ajoutPhoto__body__line"></div>
+      <div class="modal__footer">
+        <button class="modal__ajoutPhoto__footer__button">Valider</button>
       </div>
     </div>
 
@@ -126,6 +160,20 @@
         const closeModal = (document.querySelector(".overlay").style.display =
           "none");
         const closeModal2 = (document.querySelector(".modal").style.display =
+          "none");
+      }
+      function ajoutPhoto() {
+        const openAjoutPhoto = (document.querySelector(
+          ".modal__ajoutPhoto"
+        ).style.display = "block");
+        const openOverlay = (document.querySelector(".overlay").style.display =
+          "block");
+      }
+      function closeAjoutPhoto() {
+        const closeAjoutPhoto = (document.querySelector(
+          ".modal__ajoutPhoto"
+        ).style.display = "none");
+        const closeOverlay = (document.querySelector(".overlay").style.display =
           "none");
       }
     </script>

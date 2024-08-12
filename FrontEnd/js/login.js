@@ -7,9 +7,9 @@ const submitButton = form.elements['submit-form'];
 submitButton.addEventListener("click", function (event) {
     event.preventDefault();
   
-   
+    const messageError = document.getElementById("msg-error");
     if (form.email.value === "" || form.password.value === "") {
-        const messageError = document.getElementById("msg-error");
+        
         messageError.style.display = "block";
     } else {
         const identifiant = {
@@ -40,6 +40,7 @@ submitButton.addEventListener("click", function (event) {
         })
         .catch(error => {
             console.error('Error:', error);
+            const messageError = document.getElementById("msg-error");
         });  
     }
 });
