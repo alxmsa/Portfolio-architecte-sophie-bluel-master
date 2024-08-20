@@ -101,7 +101,7 @@
     <div class="overlay"></div>
 
     <div class="modal">
-      <div class="modal__close" onclick="closeModal()">
+      <div class="modal__close" onclick="closeModal(); closeOverlay()">
         <i class="fa-solid fa-xmark"></i>
       </div>
       <div class="modal__header">
@@ -111,14 +111,17 @@
       <div class="modal__body"></div>
       <div class="modal__line"></div>
       <div class="modal__footer">
-        <button class="modal__footer__button" onclick="ajoutPhoto()">
+        <button
+          class="modal__footer__button"
+          onclick="ajoutPhoto(); closeModal()"
+        >
           Ajouter une photo
         </button>
       </div>
     </div>
 
     <div class="modal__ajoutPhoto">
-      <div class="modal__close">
+      <div class="modal__close" onclick="closeAjoutPhoto(); closeOverlay()">
         <i class="fa-solid fa-xmark"></i>
       </div>
       <div class="modal__header">
@@ -149,34 +152,6 @@
       </div>
     </div>
 
-    <script>
-      function openModal() {
-        const openModal = (document.querySelector(".overlay").style.display =
-          "block");
-        const openModal2 = (document.querySelector(".modal").style.display =
-          "block");
-      }
-      function closeModal() {
-        const closeModal = (document.querySelector(".overlay").style.display =
-          "none");
-        const closeModal2 = (document.querySelector(".modal").style.display =
-          "none");
-      }
-      function ajoutPhoto() {
-        const openAjoutPhoto = (document.querySelector(
-          ".modal__ajoutPhoto"
-        ).style.display = "block");
-        const openOverlay = (document.querySelector(".overlay").style.display =
-          "block");
-      }
-      function closeAjoutPhoto() {
-        const closeAjoutPhoto = (document.querySelector(
-          ".modal__ajoutPhoto"
-        ).style.display = "none");
-        const closeOverlay = (document.querySelector(".overlay").style.display =
-          "none");
-      }
-    </script>
     <script src="js/projets.js"></script>
     <script src="js/function.js"></script>
     <script src="js/connection.js"></script>

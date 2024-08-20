@@ -131,6 +131,7 @@ async function btnResto(){
     });
 }
 
+
 // Premier affichage de la page
 init();
 btnTous();

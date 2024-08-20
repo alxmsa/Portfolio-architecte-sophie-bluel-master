@@ -23,3 +23,30 @@ async function modal(){
 
 modal();
 
+function openModal() {
+    const openModal = (document.querySelector(".overlay").style.display =
+      "block");
+    const openModal2 = (document.querySelector(".modal").style.display =
+      "block");
+  }
+  function closeModal() {
+    const closeModal2 = (document.querySelector(".modal").style.display =
+      "none");
+  }
+  function closeOverlay() {
+    const closeOverlay = (document.querySelector(".overlay").style.display =
+      "none");
+  }
+  function ajoutPhoto() {
+    const openAjoutPhoto = (document.querySelector(
+      ".modal__ajoutPhoto"
+    ).style.display = "block");
+    const openOverlay = (document.querySelector(".overlay").style.display =
+      "block");
+  }
+  function closeAjoutPhoto() {
+    const closeAjoutPhoto = (document.querySelector(
+      ".modal__ajoutPhoto"
+    ).style.display = "none");
+  }
+
