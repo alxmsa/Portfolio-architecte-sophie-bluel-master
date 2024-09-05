@@ -11,6 +11,8 @@ async function modal(){
         // Création des balises
         const suppGallery = document.createElement("button");
         suppGallery.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        suppGallery.addEventListener('click', () => supprimerProjet(figure.id, projetsElement));
+
         const imageElement = document.createElement("img");
         imageElement.src = figure.imageUrl;
         
@@ -19,6 +21,41 @@ async function modal(){
         projetsElement.appendChild(imageElement);
         
     }
+}
+async function supprimerProjet(projetId, projetsElement) {
+  const storedUser = localStorage.getItem('user');
+  let token;
+
+  if (storedUser) {
+    const userObject = JSON.parse(storedUser);
+    token = userObject.token;
+  } else {
+    console.error("No user token found in localStorage.");
+    return;
+  }
+
+  const confirmation = confirm("Voulez-vous vraiment supprimer ce projet ?");
+  if (confirmation) {
+    try {
+      const response = await fetch(`http://localhost:5678/api/works/${projetId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        projetsElement.remove();  
+        alert("Projet supprimé avec succès !");
+      } else {
+        alert("Erreur lors de la suppression du projet.");
+      }
+    } catch (error) {
+      console.error("Erreur:", error);
+      alert("Erreur lors de la suppression du projet.");
+    }
+  }
 }
 
 modal();
