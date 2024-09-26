@@ -405,6 +405,12 @@ footer nav ul {
 	border-radius: 60px;
 	background-color: #1D6154;
 }
+.modal__ajoutPhoto__footer__button:hover{
+	cursor: pointer;
+}
 #file {
 	display: none;
+}
+#alert{
+	text-align: center;
 }

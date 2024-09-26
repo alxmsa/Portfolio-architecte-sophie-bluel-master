@@ -87,3 +87,120 @@ function openModal() {
     ).style.display = "none");
   }
 
+// AJOUT DE PHOTOS
+/* async function addWork(data) {
+  const postAddWorkUrl = 'http://localhost:5678/api/works';
+
+  const reponse = await fetch(postAddWorkUrl, {
+    method: "POST",
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+    body: data
+  });
+
+
+  return reponse.json();
+}; */
+
+// ENVOI DU FORMULAIRE 
+/* const submitButtonAjoutPhoto = document.querySelector('#submitForm'); */
+const formEl = document.querySelector("#addNewForm");
+
+formEl.addEventListener('submit', event => {
+  event.preventDefault();
+
+  const formData = new FormData(formEl);
+  console.log(formData.get('title'));
+  console.log(formData.get('image'));
+  console.log(formData.get('category'));
+  const data = Object.fromEntries(formData);
+
+ fetch(`http://localhost:5678/api/works`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getAuthorization()
+      },
+      body: JSON.stringify(data)
+    });
+
+})
+/* 
+submitButtonAjoutPhoto.addEventListener("click", function (event){
+  event.preventDefault();
+  const newProjet = {
+    title : form.addTitle.value,
+    category : form.addCategory.value,
+  }
+  const newProjetData = JSON.stringify(newProjet);
+
+  fetch('http://localhost:5678/api/works', {
+    method: "POST",
+    headers: {
+      'Authorization': getAuthorization()
+    },
+    body: newProjet
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  });
+
+}) */
+
+
+/* async function addFormSubmit(event){
+  event.preventDefault();
+
+  const addProjectForm = document.querySelector("#addNewForm");
+  const addPhotoForm = document.querySelector('#addFile')
+
+  if(!addProjectForm.checkValidity()){
+    alert("Veuillez remplir tous les champs obligatoires.");
+    return;
+  }
+
+  // Valeur formulaire
+  const title = addProjectForm.querySelector("#addTitle").value;
+  const category = addProjectForm.querySelector("#addCategory").value;
+  const file = addPhotoForm.files[0];
+
+  console.log(title, category, file);
+  console.log('titre');
+
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("category", category);
+  formData.append('image', file);
+
+  // Confirmation de l'ajout d'image
+  try {
+    const response = await addWork(formData);
+
+    console.log(response);
+    const alert = document.getElementById('alert');
+    alert.innerHTML = "Votre photo a été ajouté avec succès";
+    alert.style.display = "block";
+    setTimeout(function(){ alert.style.display = "none"; }, 5000);
+  
+  } catch (error){
+    console.log("Erreur : ", error);
+  }
+};
+const submitProjet = document.querySelector("#submitForm");
+submitProjet.addEventListener("click", ()=>{
+  closeModal();
+  closeOverlay();
+});
+
+const addProjectForm = document.querySelector("#addNewForm");
+addProjectForm.addEventListener("submit", function () {
+  addFormSubmit();
+});
+ */
+/* fetch("http://localhost:5678/api/works").then(response => {
+ return response.json();
+}).then((json) => {
+  console.log(json);
+}) */

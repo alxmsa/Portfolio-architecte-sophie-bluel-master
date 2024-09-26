@@ -127,28 +127,40 @@
       <div class="modal__header">
         <h3>Ajout photo</h3>
       </div>
+      <div id="alert" class="alert alert-success" role="alert"></div>
 
       <div class="modal__ajoutPhoto__body">
-        <form action="#">
+        <form id="addNewForm" action="#" method="POST">
           <div class="modal__ajoutPhoto__body__div">
             <i class="fa-regular fa-image"></i>
-            <label for="file">+ Ajout photo</label>
-            <input type="file" name="file" id="file" />
+            <label for="image">+ Ajout photo</label>
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              name="image"
+              id="image"
+            />
             <p>jpg, png : 4mo max</p>
           </div>
           <div class="modal__ajoutPhoto__body__div2">
-            <label for="Titre">Titre</label><br />
-            <input type="text" name="titre" id="titre" />
+            <label for="title">Titre</label><br />
+            <input type="text" name="title" id="title" />
             <br />
-            <label for="categorie">Catégorie</label><br />
-            <input type="text" name="categorie" id="categorie" />
+<!--             <select name="category" id="selectCategorie" required>
+              <option value="1">Objets</option>
+              <option value="2">Appartements</option>
+              <option value="3">Hotels & restaurants</option>
+            </select> -->
+            <label for="category">Catégorie</label><br />
+            <input type="text" name="category" id="category" />
             <br />
           </div>
+          <div class="modal__ajoutPhoto__body__line"></div>
+          <div class="modal__footer">
+            <input type="submit" id="submitForm" value="Valider" class="modal__ajoutPhoto__footer__button">
+          </input>
+          </div>
         </form>
-      </div>
-      <div class="modal__ajoutPhoto__body__line"></div>
-      <div class="modal__footer">
-        <button class="modal__ajoutPhoto__footer__button">Valider</button>
       </div>
     </div>
 
