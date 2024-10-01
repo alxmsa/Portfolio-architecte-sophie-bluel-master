@@ -1,4 +1,7 @@
 async function init(){
+    const sectionProjets = document.querySelector(".fiches");
+    sectionProjets.innerHTML = "";
+    
     const reponse = await fetch('http://localhost:5678/api/works');
     const projets = await reponse.json();
 

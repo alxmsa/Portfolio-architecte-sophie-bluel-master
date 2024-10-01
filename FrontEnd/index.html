@@ -98,7 +98,7 @@
       </nav>
     </footer>
 
-    <div class="overlay"></div>
+    <div class="overlay" onclick="closeModal(); closeOverlay(); closeAjoutPhoto()"></div>
 
     <div class="modal">
       <div class="modal__close" onclick="closeModal(); closeOverlay()">
@@ -146,13 +146,16 @@
             <label for="title">Titre</label><br />
             <input type="text" name="title" id="title" />
             <br />
-<!--             <select name="category" id="selectCategorie" required>
+            <p>Categorie</p>
+            <select class="custom-select" name="category" required>
+              <option value="0" id="selectOption0" selected></option>
               <option value="1">Objets</option>
               <option value="2">Appartements</option>
-              <option value="3">Hotels & restaurants</option>
-            </select> -->
-            <label for="category">Catégorie</label><br />
-            <input type="text" name="category" id="category" />
+              <option value="3">Restaurants</option>
+            </select>
+            <div id="msg-error-category">
+              <h4>Erreur, un des champs n'est pas complété !</h4>
+            </div>
             <br />
           </div>
           <div class="modal__ajoutPhoto__body__line"></div>
@@ -167,6 +170,6 @@
     <script src="js/projets.js"></script>
     <script src="js/function.js"></script>
     <script src="js/connection.js"></script>
-    <script src="js/modal.js"></script>
+    <script src="js/modal2.js"></script>
   </body>
 </html>
