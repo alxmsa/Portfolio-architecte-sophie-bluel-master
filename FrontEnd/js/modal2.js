@@ -119,9 +119,11 @@ async function ajouterProjet(event) {
   // TODO verifier que les champs sont pas vide ici stp (À FAIRE)
   const select = document.querySelector("#selectOption0");
   const checkTitle = document.querySelector("#title");
-  if (select.value ==="0" || checkTitle.value === ""){
-    const erreur = document.querySelector("#msg-error-category");
-    erreur.style.display="block"; 
+  const checkImage = document.querySelector('#image');
+  if (select.value ==="0" || checkTitle.value === "" || checkImage.value === ""){
+    alert("Erreur, un des champs n'est pas complété !")
+    /* const erreur = document.querySelector("#msg-error-category");
+    erreur.style.display="block";  */
   }
 
   try {
@@ -134,25 +136,47 @@ async function ajouterProjet(event) {
     });
 
     if (response.ok) {
+        alert('Succès, votre projet a bien été enregistrer !')
         resetForm();
+        erreur.style.display='none';
         await modal(); 
-        await init(); 
+        await init();
 
     }/*  else {
       alert("Erreur lors de l'ajout du projet.");
     } */
   } catch (error) {
     console.error("Erreur lors de l'ajout du projet:", error);
-    alert("Erreur lors de l'ajout du projet.");
   }
 }
 
 document.querySelector("#addNewForm").addEventListener('submit', ajouterProjet);
 
+// APERCU DE L'IMAGE
+/* const uploadImageInput = document.querySelector("#image");
+const uploadContent = document.querySelector(".modal__ajoutPhoto__body__div");
+const projectUpload = document.querySelector('#previewImage');
 
-/*   function resetForm() {
-    document.querySelector("#addNEwForm").submit();
-    document.querySelector("addNewForm").reset();
-    } */
+uploadImageInput.addEventListener("change", function () {
+  uploadImage();
+});
 
+function previewImage() {
+  if(uploadImageInput.files && uploadImageInput.files[0]) {
+    const reader = new FileReader();
+    const image2 = new Image();
+    const fileName = uploadImageInput.files[0].name;
+
+    reader.onload = event => {
+      image2.src = event.target.result;
+      image2.alt = fileNAme.split(".")[0];
+    };
+
+    uploadContent.style.display='none';
+    projectUpload.style.display='block';
+    reader.readAsDataURL(uploadImageInput.files[0]);
+    projectUpload.appendChild(image2);
+  }
+}
+ */
 
