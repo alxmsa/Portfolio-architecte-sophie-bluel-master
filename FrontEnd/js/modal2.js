@@ -122,8 +122,6 @@ async function ajouterProjet(event) {
   const checkImage = document.querySelector('#image');
   if (select.value ==="0" || checkTitle.value === "" || checkImage.value === ""){
     alert("Erreur, un des champs n'est pas complété !")
-    /* const erreur = document.querySelector("#msg-error-category");
-    erreur.style.display="block";  */
   }
 
   try {
@@ -139,7 +137,7 @@ async function ajouterProjet(event) {
         alert('Succès, votre projet a bien été enregistrer !')
         resetForm();
         erreur.style.display='none';
-        await modal(); 
+        await modal();
         await init();
 
     }/*  else {
