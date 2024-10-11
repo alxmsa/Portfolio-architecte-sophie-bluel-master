@@ -62,7 +62,7 @@
       <section id="portfolio">
         <div class="m-e-portfolio">
           <h2>Mes Projets</h2>
-          <p id="modifier" onclick="openModal()">
+          <p id="modifier">
             <i class="fa-regular fa-pen-to-square"></i> Modifier
           </p>
         </div>
@@ -98,10 +98,10 @@
       </nav>
     </footer>
 
-    <div class="overlay" onclick="closeModal(); closeOverlay(); closeAjoutPhoto()"></div>
+    <div class="overlay"></div>
 
     <div class="modal">
-      <div class="modal__close" onclick="closeModal(); closeOverlay()">
+      <div class="modal__close">
         <i class="fa-solid fa-xmark"></i>
       </div>
       <div class="modal__header">
@@ -113,7 +113,6 @@
       <div class="modal__footer">
         <button
           class="modal__footer__button"
-          onclick="ajoutPhoto(); closeModal()"
         >
           Ajouter une photo
         </button>
@@ -121,7 +120,8 @@
     </div>
 
     <div class="modal__ajoutPhoto">
-      <div class="modal__close" onclick="closeAjoutPhoto(); closeOverlay()">
+      <div class="modal__back"><i class="fa-solid fa-arrow-left"></i></div>
+      <div class="modal__ajout__close">
         <i class="fa-solid fa-xmark"></i>
       </div>
       <div class="modal__header">
@@ -131,7 +131,9 @@
 
       <div class="modal__ajoutPhoto__body">
         <form id="addNewForm" action="#" method="POST">
-          <div id="previewImage"></div>
+          <div class="modal__ajoutPhoto__body__div0">
+            <div id="previewImage"></div>
+          </div>
           <div class="modal__ajoutPhoto__body__div">
             <i class="fa-regular fa-image"></i>
             <label for="image">+ Ajout photo</label>

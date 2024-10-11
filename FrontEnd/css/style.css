@@ -279,19 +279,31 @@ footer nav ul {
 	color: #fff;
 	font-size: 10px;
 }
-.modal__close {
+.modal__back {
+	cursor: pointer;
+	width: 20px;
+}
+.modal__back i {
+	font-size: 20px;
+}
+.modal__close, 
+.modal__ajout__close {
 	position: absolute;
 	top: 15px;
 	right: 20px;
 	cursor: pointer;
 }
-.modal__close i {
+.modal__close i,
+.modal__ajout__close i {
 	font-size: 20px;
+}
+.modal .modal__header h3 {
+	padding: 20px 0 40px 0;
 }
 .modal__header h3 {
 	font-size: 1.5rem;
 	text-align: center;
-	padding: 20px 0 40px 0;
+	padding: 10px 0;
 }
 .modal__body{
 	display: flex;
@@ -343,11 +355,24 @@ footer nav ul {
 	border-radius: 3px;
 	padding: 20px;
 }
-.modal__ajoutPhoto__body__div {
-    height: 150px;
+.modal__ajoutPhoto__body__div0 {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* height: 150px;  */
     width: 450px;
     background-color: #E8F1F6;
     margin: auto;
+}
+.modal__ajoutPhoto__body__div {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* height: 150px;  */
+    width: 450px;
+    background-color: #E8F1F6;
+    margin: auto;
+
 }
 .modal__ajoutPhoto__body__div i {
 	text-align: center;
@@ -423,9 +448,4 @@ footer nav ul {
 	display: none;
 	justify-content: center;
 	color: red;
-}
-#previewImage {
-	width: 13rem;
-	display: none;
-	padding-bottom: 18px;
 }

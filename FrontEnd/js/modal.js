@@ -1,3 +1,4 @@
+// 
 async function modal(){
   const reponse = await fetch('http://localhost:5678/api/works');
   const projets = await reponse.json();
@@ -22,6 +23,7 @@ async function modal(){
       
   }
 }
+// SUPPRESSION DE PROJETS
 async function supprimerProjet(projetId, projetsElement) {
 const storedUser = localStorage.getItem('user');
 let token;
@@ -62,6 +64,7 @@ if (confirmation) {
 }
 modal();
 
+// FUNCTIONS OUVRIR ET FERMER MODAL
 function openModal() {
   const openModal = (document.querySelector(".overlay").style.display =
     "block");
@@ -90,8 +93,14 @@ function closeAjoutPhoto() {
   ).style.display = "none");
 }
 
+// RESET FORMULAIRE
+const previewHide = document.querySelector(".modal__ajoutPhoto__body__div0");
+const ajoutPhotoReset = document.querySelector(".modal__ajoutPhoto__body__div");
+
 function resetForm(){
 document.querySelector("#addNewForm").reset();
+ajoutPhotoReset.style.display="block";
+previewHide.style.display='none';
 }
 
 async function ajouterProjet(event) {
@@ -143,7 +152,7 @@ try {
 }
 }
 
-
+// ENVOI DU FORMULAIRE AJOUT PHOTO DANS LA BASE DE DONNÉES
 function ajouterProjetDOM(projet) {
 const sectionProjets = document.querySelector(".fiches");
 
@@ -161,3 +170,34 @@ sectionProjets.appendChild(projetsElement);
 }
 document.querySelector("#addNewForm").addEventListener('submit', ajouterProjet);
 
+
+// VARIABLES AddEventListener
+const clseOverlay = document.querySelector('.overlay');
+const modifierProjets = document.querySelector('#modifier');
+const modalBack = document.querySelector(".modal__back");
+const modalClose = document.querySelector('.modal__close');
+const openAjoutPhoto = document.querySelector('.modal__footer__button');
+const closeModalAjout = document.querySelector('.modal__ajout__close');
+
+// AddEventListener
+clseOverlay.addEventListener('click', function(){
+  closeOverlay();
+  closeModal();
+  closeAjoutPhoto();
+});
+modifierProjets.addEventListener('click', function(){
+  openModal();
+});
+modalBack.addEventListener("click", function(){
+  openModal();
+  closeAjoutPhoto();
+});
+modalClose.addEventListener('click', function(){
+  closeModal(); closeOverlay(); closeAjoutPhoto();
+});
+openAjoutPhoto.addEventListener('click', function(){
+  ajoutPhoto(); closeModal();
+});
+closeModalAjout.addEventListener('click', function(){
+   closeOverlay(); closeAjoutPhoto();
+});
