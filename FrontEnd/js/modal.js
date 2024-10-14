@@ -25,42 +25,42 @@ async function modal(){
 }
 // SUPPRESSION DE PROJETS
 async function supprimerProjet(projetId, projetsElement) {
-const storedUser = localStorage.getItem('user');
-let token;
+  const storedUser = localStorage.getItem('user');
+  let token;
 
-if (storedUser) {
-  const userObject = JSON.parse(storedUser);
-  token = userObject.token;
-} else {
-  console.error("No user token found in localStorage.");
-  return;
-}
+  if (storedUser) {
+    const userObject = JSON.parse(storedUser);
+    token = userObject.token;
+  } else {
+    console.error("No user token found in localStorage.");
+    return;
+  }
 
-const confirmation = confirm("Voulez-vous vraiment supprimer ce projet ?");
-if (confirmation) {
-  try {
-    const response = await fetch(`http://localhost:5678/api/works/${projetId}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
+  const confirmation = confirm("Voulez-vous vraiment supprimer ce projet ?");
+  if (confirmation) {
+    try {
+      const response = await fetch(`http://localhost:5678/api/works/${projetId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+
+        projetsElement.remove();  
+        alert("Projet supprimé avec succès !");
+
+        await init();
+      } else {
+        alert("Erreur lors de la suppression du projet.");
       }
-    });
-
-    if (response.ok) {
-
-      projetsElement.remove();  
-      alert("Projet supprimé avec succès !");
-
-      await init();
-    } else {
+    } catch (error) {
+      console.error("Erreur:", error);
       alert("Erreur lors de la suppression du projet.");
     }
-  } catch (error) {
-    console.error("Erreur:", error);
-    alert("Erreur lors de la suppression du projet.");
   }
-}
 }
 modal();
 

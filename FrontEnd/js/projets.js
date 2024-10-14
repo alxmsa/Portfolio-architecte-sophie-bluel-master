@@ -8,7 +8,7 @@ async function init(){
     for(let i = 0; i < projets.length; i ++){
         const figure = projets[i];
         // Récupération de l'élément du DOM qui accueillera les fiches
-        const sectionProjets = document.querySelector(".fiches");
+        /* const sectionProjets = document.querySelector(".fiches"); */
         // Création d'une balise dédiée à un projet de l'architecte
         const projetsElement = document.createElement("article");
         // Création des balises
