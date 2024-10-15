@@ -143,14 +143,14 @@ li a:hover {
 .gallery img {
 	width: 100%;
 }
-.buttonFilter {
+#boutonFiltre {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	width: 50%;
 	margin: auto;
 	padding-bottom: 30px;
 }
-.buttonFilter button {
+.btn-filter {
 	font-family: 'Syne';
 	font-size: 16px;
 	padding: 8px 15px;
@@ -159,7 +159,7 @@ li a:hover {
 	background-color: #fff;
 	border: 1px solid #1D6154;
 }
-.buttonFilter button:hover{
+.btn-filter:hover{
 	background-color: #1D6154;
 	color: #fff;
 	cursor: pointer;
@@ -203,6 +203,11 @@ input[type="submit"]{
 	background-color: #1D6154;
 	margin : 2em auto ;
 	border-radius: 60px ;
+}
+input[type="submit"]:hover {
+	color: #1D6154;
+	background-color: white;
+	border: 1px solid #1D6154;
 }
 
 footer nav ul {
@@ -429,7 +434,7 @@ footer nav ul {
 .modal__ajoutPhoto__footer__button:hover{
 	cursor: pointer;
 }
-.custom-select {
+#custom-select {
 	display: block;
     width: 100%;
 	margin: 10px auto;

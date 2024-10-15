@@ -3,6 +3,9 @@ async function modal(){
   const reponse = await fetch('http://localhost:5678/api/works');
   const projets = await reponse.json();
 
+  const innerProjets = document.querySelector('.modal__body');
+  innerProjets.innerHTML = "";
+
   for(let i = 0; i < projets.length; i ++){
       const figure = projets[i];
       // Récupération de l'élément du DOM qui accueillera les fiches dans la modale
@@ -23,6 +26,32 @@ async function modal(){
       
   }
 }
+
+async function categorieSelect(){
+  const select = document.querySelector('#custom-select');
+  select.innerHTML = "";
+  
+  const reponse = await fetch('http://localhost:5678/api/categories');
+  const slt = await reponse.json();
+
+  const firstSelect = document.createElement('option');
+      firstSelect.classList.add('sltCategory')
+      firstSelect.innerText = "-"
+
+  select.appendChild(firstSelect);
+
+  slt.forEach(category => {
+    const optionElement = document.createElement('option');
+    optionElement.classList.add('slt-categorie');
+    optionElement.innerText = category.name;
+    optionElement.value = category.id;
+    select.appendChild(optionElement);
+});
+}
+
+categorieSelect();
+
+
 // SUPPRESSION DE PROJETS
 async function supprimerProjet(projetId, projetsElement) {
   const storedUser = localStorage.getItem('user');
@@ -104,52 +133,64 @@ previewHide.style.display='none';
 }
 
 async function ajouterProjet(event) {
-event.preventDefault();
+  event.preventDefault();
 
-const storedUser = localStorage.getItem('user');
-let token;
+  const storedUser = localStorage.getItem('user');
+  let token;
 
-// On récupère le token
-if (storedUser) {
-  const userObject = JSON.parse(storedUser);
-  token = userObject.token;
-} else {
-  console.error("Pas de token trouvé");
-  return;
-}
-
-
-const formEl = document.querySelector("#addNewForm");
-const formData = new FormData(formEl);
-
-
-const checkImage = document.querySelector('#image');  
-
-if (checkImage.files.length === 0) {
-  alert("Erreur, un fichier n'a pas été sélectionné !");
-  return;
-}
-
-try {
-  const response = await fetch('http://localhost:5678/api/works', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${token}`
-    },
-    body: formData
-  });
-
-  if (response.ok) {
-    const newProject = await response.json();
-    alert('Succès, votre projet a bien été enregistré !');
-    ajouterProjetDOM(newProject); 
-    resetForm();  
+  // On récupère le token
+  if (storedUser) {
+    const userObject = JSON.parse(storedUser);
+    token = userObject.token;
   } else {
-    alert("Erreur lors de l'ajout du projet.");
+    console.error("Pas de token trouvé");
+    return;
   }
-} catch (error) {
-  console.error("Erreur lors de l'ajout du projet:", error);
-}
+
+
+  const formEl = document.querySelector("#addNewForm");
+  const formData = new FormData(formEl);
+
+
+  const checkImage = document.querySelector('#image');
+  const checkTitle = document.querySelector('#title');
+  const checkCategory = document.querySelector('#custom-select');  
+
+  if (checkImage.files.length === 0) {
+    alert("Erreur, un fichier n'a pas été sélectionné !");
+    return;
+  }else if (checkTitle.value.trim() === ""){
+    alert("Erreur, veuillez ajouter un titre pour continuer !");
+    return;
+  }else if (checkCategory.value === "-") {
+    alert("Erreur, veuillez sélectionner une catégorie !");
+    return;
+  }
+
+  formData.append('category', checkCategory.value);
+
+  try {
+    const response = await fetch('http://localhost:5678/api/works', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    });
+
+    if (response.ok) {
+      const newProject = await response.json();
+      alert('Succès, votre projet a bien été enregistré !');
+      ajouterProjetDOM(newProject); 
+      resetForm();
+      await modal();
+    
+    } else {
+      alert("Erreur lors de l'ajout du projet.");
+    }
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du projet:", error);
+  }
 }
 
 // ENVOI DU FORMULAIRE AJOUT PHOTO DANS LA BASE DE DONNÉES
@@ -200,4 +241,31 @@ openAjoutPhoto.addEventListener('click', function(){
 });
 closeModalAjout.addEventListener('click', function(){
    closeOverlay(); closeAjoutPhoto();
+});
+
+document.getElementById('image').addEventListener('change', function (event) {
+  const file = event.target.files[0];
+  const previewImage = document.getElementById('previewImage');
+  const close = document.querySelector(".modal__ajoutPhoto__body__div");
+
+
+  previewImage.innerHTML = '';
+
+  
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.alt = 'Aperçu de l\'image';
+        img.style.maxWidth = '150px';
+        img.style.maxHeight = '150px';
+        const previewDisplay = document.querySelector(".modal__ajoutPhoto__body__div0");
+        previewDisplay.style.display="flex";
+        previewImage.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+   if (file){
+    close.style.display="none";
+   }
+  
 });

@@ -3,12 +3,12 @@
 const modeEdition = document.querySelector(".m-e-header");
 const modifier = document.querySelector("#modifier");
 const logout = document.querySelector('#logout');
-const removeButton = document.querySelector(".buttonFilter");
+/* const removeButton = document.querySelector(".boutonFiltre"); */
 
 if(isConnected()) {
     modeEdition.style.display = "flex";
     modifier.style.display = "block";
-    removeButton.style.display = "none";
+/*     removeButton.style.display = "none"; */
 
     logout.textContent = "logout";
     

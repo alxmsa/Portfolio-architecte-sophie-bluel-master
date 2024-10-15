@@ -23,121 +23,56 @@ async function init(){
     }
 }
 
-async function btnObjets (){
-    const reponse = await fetch('http://localhost:5678/api/works');
-    const projets = await reponse.json();
+async function filterBtn(){
+    const boutons = document.querySelector('#boutonFiltre');
+    boutons.innerHTML = "";
 
-    // Ajout du listener pour trier les projets par objets
-    const boutonObjets = document.querySelector(".btn-objets");
-    
-    // Création d'évènements pour les boutons
-    boutonObjets.addEventListener("click", function() {
-        const genererObjets = projets.filter(function(projet){
-            return projet.categoryId === 1;
-        });
-        console.log(genererObjets);
-    // Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
-        document.querySelector(".fiches").innerHTML = "";
-        for(let i = 0; i < genererObjets.length; i ++){
-            const figure = genererObjets[i];
-            // Récupération de l'élément du DOM qui accueillera les fiches
-            const genererProjets = document.querySelector(".fiches");
-            // Création d'une balise dédiée à un projet de l'architecte
-            const projetsObjets = document.createElement("article");
-            // Création des balises
-            const imageElement = document.createElement("img");
-            imageElement.src = figure.imageUrl;
-            const titreElement = document.createElement("figcaption");
-            titreElement.innerText = figure.title;
-            
-            genererProjets.appendChild(projetsObjets);
-            projetsObjets.appendChild(imageElement);
-            projetsObjets.appendChild(titreElement);
-        }
+    const reponse = await fetch('http://localhost:5678/api/categories');
+    const btn = await reponse.json();
+
+    const buttonTous = document.createElement('button');
+        buttonTous.classList.add('btn-filter');
+        buttonTous.innerText = "Tous";
+
+    boutons.appendChild(buttonTous);
+
+    buttonTous.addEventListener('click', () => btnEvent());
+
+    btn.forEach(category => {
+        const btnElement = document.createElement('button');
+        btnElement.classList.add("btn-filter");
+        btnElement.innerText = category.name;
+        btnElement.dataset.categoryId = category.id;
+
+        boutons.appendChild(btnElement);
+
+        btnElement.addEventListener('click', () => btnEvent(category.id));
     });
 }
 
-async function btnTous(){
+async function btnEvent(categoryId = null){
     const reponse = await fetch('http://localhost:5678/api/works');
     const projets = await reponse.json();
 
-    const boutonTous = document.querySelector('.btn-out');
+   const filtreProjets = categoryId ? projets.filter(projet => projet.categoryId === categoryId) : projets;
+   
+   const fichesContainer = document.querySelector('.fiches');
+   fichesContainer.innerHTML = "";
 
-    boutonTous.addEventListener("click", function(){
-        document.querySelector('.fiches').innerHTML = "";
-        init();
-    });
+   filtreProjets.forEach(projet => {
+    const article = document.createElement('article');
+    const img = document.createElement('img');
+    img.src = projet.imageUrl;
+    const figcaption = document.createElement('figcaption');
+    figcaption.innerText = projet.title;
+
+    article.appendChild(img);
+    article.appendChild(figcaption);
+    fichesContainer.appendChild(article);
+
+   });
 }
-
-async function btnAppart (){
-    const reponse = await fetch('http://localhost:5678/api/works');
-    const projets = await reponse.json();
-
-    // Ajout du listener pour trier les projets par objets
-    const boutonAppartement = document.querySelector(".btn-appartement");
-    
-    // Création d'évènements pour les boutons
-    boutonAppartement.addEventListener("click", function() {
-        const genererboutonAppartement = projets.filter(function(projet){
-            return projet.categoryId === 2;
-        });
-    // Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
-        document.querySelector(".fiches").innerHTML = "";
-        for(let i = 0; i < genererboutonAppartement.length; i ++){
-            const figure = genererboutonAppartement[i];
-            // Récupération de l'élément du DOM qui accueillera les fiches
-            const genererProjets = document.querySelector(".fiches");
-            // Création d'une balise dédiée à un projet de l'architecte
-            const projetsObjets = document.createElement("article");
-            // Création des balises
-            const imageElement = document.createElement("img");
-            imageElement.src = figure.imageUrl;
-            const titreElement = document.createElement("figcaption");
-            titreElement.innerText = figure.title;
-            
-            genererProjets.appendChild(projetsObjets);
-            projetsObjets.appendChild(imageElement);
-            projetsObjets.appendChild(titreElement);
-        }  
-    });
-}
-
-async function btnResto(){
-    const reponse = await fetch('http://localhost:5678/api/works');
-    const projets = await reponse.json();
-
-    const boutonResto = document.querySelector('.btn-resto');
-
-    boutonResto.addEventListener("click", function(){
-        const genererBtnResto = projets.filter(function(projet){
-            return projet.categoryId === 3;
-        });
-            // Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
-        document.querySelector(".fiches").innerHTML = "";
-        for(let i = 0; i < genererBtnResto.length; i ++){
-            const figure = genererBtnResto[i];
-            // Récupération de l'élément du DOM qui accueillera les fiches
-            const genererProjets = document.querySelector(".fiches");
-            // Création d'une balise dédiée à un projet de l'architecte
-            const projetsObjets = document.createElement("article");
-            // Création des balises
-            const imageElement = document.createElement("img");
-            imageElement.src = figure.imageUrl;
-            const titreElement = document.createElement("figcaption");
-            titreElement.innerText = figure.title;
-            
-            genererProjets.appendChild(projetsObjets);
-            projetsObjets.appendChild(imageElement);
-            projetsObjets.appendChild(titreElement);
-        }  
-        
-    });
-}
-
-
 // Premier affichage de la page
 init();
-btnTous();
-btnObjets();
-btnAppart();
-btnResto();
+filterBtn()
+btnEvent();

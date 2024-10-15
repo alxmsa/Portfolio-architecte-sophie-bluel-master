@@ -66,12 +66,8 @@
             <i class="fa-regular fa-pen-to-square"></i> Modifier
           </p>
         </div>
-        <div class="buttonFilter">
-          <button class="btn-out">Tous</button>
-          <button class="btn-objets">Objets</button>
-          <button class="btn-appartement">Appartements</button>
-          <button class="btn-resto">Hôtels & restaurants</button>
-        </div>
+        <div id="boutonFiltre"></div>
+       
         <div class="gallery fiches"></div>
       </section>
 
@@ -150,12 +146,13 @@
             <input type="text" name="title" id="title" />
             <br />
             <p>Categorie</p>
-            <select class="custom-select" name="category" required>
+<!--             <select class="custom-select" name="category" required>
               <option value="0" id="selectOption0" selected></option>
               <option value="1">Objets</option>
               <option value="2">Appartements</option>
               <option value="3">Restaurants</option>
-            </select>
+            </select> -->
+            <select name="categories" id="custom-select" required></select>
             <div id="msg-error-category">
               <h4>Erreur, un des champs n'est pas complété !</h4>
             </div>
